@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giraffe Cave LLC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #060814;
+      --navy-mid: #0e0a1e;
+      --gold: #C8934A;
+      --gold-light: #E8A855;
+      --moon: rgba(140,165,230,0.80);
+      --text: #F0EDE6;
+      --muted: rgba(240,237,230,0.50);
+      --subtle: rgba(240,237,230,0.22);
+      --card-bg: rgba(8,16,52,0.85);
+      --card-border: rgba(200,147,74,0.30);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Star field background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1.5px 1.5px at 12% 8%, rgba(220,235,255,0.55) 0%, transparent 100%),
+        radial-gradient(1px 1px at 28% 15%, rgba(220,235,255,0.40) 0%, transparent 100%),
+        radial-gradient(2px 2px at 44% 5%, rgba(220,235,255,0.60) 0%, transparent 100%),
+        radial-gradient(1px 1px at 61% 12%, rgba(220,235,255,0.35) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 78% 7%, rgba(220,235,255,0.50) 0%, transparent 100%),
+        radial-gradient(1px 1px at 91% 18%, rgba(220,235,255,0.40) 0%, transparent 100%),
+        radial-gradient(2px 2px at 5% 28%, rgba(220,235,255,0.45) 0%, transparent 100%),
+        radial-gradient(1px 1px at 33% 35%, rgba(220,235,255,0.30) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 55% 42%, rgba(220,235,255,0.50) 0%, transparent 100%),
+        radial-gradient(1px 1px at 72% 30%, rgba(220,235,255,0.35) 0%, transparent 100%),
+        radial-gradient(2px 2px at 88% 38%, rgba(220,235,255,0.55) 0%, transparent 100%),
+        radial-gradient(1px 1px at 18% 55%, rgba(220,235,255,0.30) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 40% 62%, rgba(220,235,255,0.45) 0%, transparent 100%),
+        radial-gradient(1px 1px at 65% 58%, rgba(220,235,255,0.35) 0%, transparent 100%),
+        radial-gradient(2px 2px at 82% 65%, rgba(220,235,255,0.50) 0%, transparent 100%),
+        radial-gradient(1px 1px at 95% 52%, rgba(220,235,255,0.40) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 8% 72%, rgba(220,235,255,0.45) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 78%, rgba(220,235,255,0.30) 0%, transparent 100%),
+        radial-gradient(2px 2px at 50% 85%, rgba(220,235,255,0.55) 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 80%, rgba(220,235,255,0.35) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Moonlight glow top right */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -80px;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(ellipse at center, rgba(160,185,230,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(6,8,20,0.95), transparent);
+    }
+
+    .nav-logo {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+    }
+
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200,147,74,0.10);
+      border: 1px solid rgba(200,147,74,0.28);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 7vw, 72px);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    .hero-title span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .hero-divider {
+      width: 40px;
+      height: 1.5px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin-bottom: 48px;
+    }
+
+    /* App Card */
+    .app-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 80px;
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(12px);
+    }
+
+    .app-card-emoji {
+      font-size: 64px;
+      margin-bottom: 20px;
+      display: block;
+      text-align: center;
+    }
+
+    .app-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .app-tagline {
+      font-size: 15px;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+
+    .app-description {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 560px;
+      margin-bottom: 28px;
+    }
+
+    .app-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .app-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 16px;
+      background: rgba(200,147,74,0.06);
+      border: 1px solid rgba(200,147,74,0.14);
+      border-radius: 12px;
+    }
+
+    .app-feature-check {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .app-feature-text {
+      font-size: 13px;
+      color: rgba(240,237,230,0.75);
+      line-height: 1.5;
+    }
+
+    .app-store-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--text);
+      color: var(--navy);
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .app-store-badge:hover { opacity: 0.88; }
+
+    .app-store-badge span {
+      font-size: 11px;
+      font-weight: 400;
+      display: block;
+      opacity: 0.6;
+      letter-spacing: 0.5px;
+    }
+
+    .app-store-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200,147,74,0.10);
+      border: 1px solid rgba(200,147,74,0.28);
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .section-body {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    .section-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(200,147,74,0.35);
+      margin: 60px 0;
+    }
+
+    /* Privacy & Terms */
+    .legal-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(140,165,230,0.20);
+      border-radius: 20px;
+      padding: 36px 40px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(8px);
+    }
+
+    .legal-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .legal-card .legal-date {
+      font-size: 12px;
+      color: var(--subtle);
+      letter-spacing: 0.5px;
+      margin-bottom: 24px;
+    }
+
+    .legal-card h3 {
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 28px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .legal-card p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    .legal-card a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .legal-card a:hover { text-decoration: underline; }
+
+    /* Contact */
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      margin-bottom: 12px;
+      backdrop-filter: blur(8px);
+    }
+
+    .contact-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .contact-label {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 2px;
+    }
+
+    .contact-value {
+      font-size: 15px;
+      color: var(--text);
+      font-weight: 300;
+    }
+
+    .contact-value a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .contact-value a:hover { text-decoration: underline; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--subtle);
+      padding: 40px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--subtle);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--subtle);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--muted); }
+
+    /* Anchor offset for fixed nav */
+    [id] { scroll-margin-top: 80px; }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px; }
+      .nav-links { display: none; }
+      .app-card { padding: 28px 20px; }
+      .legal-card { padding: 24px 20px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a class="nav-logo" href="#home">Giraffe Cave</a>
+    <ul class="nav-links">
+      <li><a href="#app">Show Up</a></li>
+      <li><a href="#privacy">Privacy</a></li>
+      <li><a href="#terms">Terms</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Giraffe Cave LLC
+      </div>
+      <h1 class="hero-title">
+        Apps built with<br /><span>purpose.</span>
+      </h1>
+      <p class="hero-subtitle">
+        Giraffe Cave LLC is an independent software studio. We build thoughtful mobile apps for people who want to live with more intention.
+      </p>
+      <div class="hero-divider"></div>
+
+      <!-- App Card -->
+      <div class="app-card" id="app">
+        <span class="app-card-emoji">☀️</span>
+        <h2 class="app-name">Show Up</h2>
+        <p class="app-tagline">One promise. Every day. That's it.</p>
+        <p class="app-description">
+          Show Up is a daily self-trust app for iOS. Each morning you make one promise to yourself. Each evening you check in. Over time you build something real — a track record of showing up for yourself, one day at a time.
+        </p>
+        <div class="app-features">
+          <div class="app-feature">
+            <span class="app-feature-check">✓</span>
+            <span class="app-feature-text">One promise each morning</span>
+          </div>
+          <div class="app-feature">
+            <span class="app-feature-check">✓</span>
+            <span class="app-feature-text">Evening check-in — honest and simple</span>
+          </div>
+          <div class="app-feature">
+            <span class="app-feature-check">✓</span>
+            <span class="app-feature-text">Track your streak of kept promises</span>
+          </div>
+          <div class="app-feature">
+            <span class="app-feature-check">✓</span>
+            <span class="app-feature-text">Milestone moments as you grow</span>
+          </div>
+        </div>
+        <div class="app-store-soon">
+          ☀️ &nbsp;Coming soon to the App Store
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="section-divider"></div>
+
+    <!-- Privacy Policy -->
+    <section id="privacy">
+      <div class="legal-card">
+        <h2>Privacy Policy</h2>
+        <p class="legal-date">Effective Date: April 4, 2026</p>
+
+        <h3>Overview</h3>
+        <p>Giraffe Cave LLC ("we," "us," or "our") built the Show Up app as a personal development tool. This policy explains how we handle your information when you use our app.</p>
+
+        <h3>Information We Collect</h3>
+        <p>Show Up stores your daily promises and check-in results locally on your device. We do not collect, transmit, or have access to the content of anything you write in the app.</p>
+        <p>If you choose to enable the optional backup feature (premium subscribers only), your entries are encrypted and stored securely. We never read, sell, or share your personal entries with any third party.</p>
+
+        <h3>What We Do Not Collect</h3>
+        <p>We do not collect your name, email address, location, or any personally identifiable information unless you contact us directly for support. We do not use advertising networks or sell data to third parties. We do not track your behavior across other apps or websites.</p>
+
+        <h3>Third-Party Services</h3>
+        <p>Show Up uses RevenueCat to process in-app purchases. RevenueCat's privacy policy governs any data they collect in connection with subscription management. We do not share your promise content with RevenueCat or any other service.</p>
+
+        <h3>Crisis Safety</h3>
+        <p>Show Up is a self-reflection tool, not a mental health treatment or crisis intervention service. If certain keywords suggesting distress are detected in the promise input field, the app surfaces crisis support resources including the 988 Suicide and Crisis Lifeline. This detection occurs entirely on your device and no content is transmitted to us.</p>
+
+        <h3>Children's Privacy</h3>
+        <p>Show Up is not directed at children under 13. We do not knowingly collect information from children under 13.</p>
+
+        <h3>Changes to This Policy</h3>
+        <p>We may update this policy from time to time. Changes will be posted on this page with an updated effective date.</p>
+
+        <h3>Contact Us</h3>
+        <p>Questions about this privacy policy? Contact us at <a href="/cdn-cgi/l/email-protection#5c3b352e3d3a3a393f3d2a391c3b313d3530723f3331"><span class="__cf_email__" data-cfemail="baddd3c8dbdcdcdfd9dbccdffaddd7dbd3d694d9d5d7">[email&#160;protected]</span></a></p>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Terms of Service -->
+    <section id="terms">
+      <div class="legal-card">
+        <h2>Terms of Service</h2>
+        <p class="legal-date">Effective Date: April 4, 2026</p>
+
+        <h3>Acceptance</h3>
+        <p>By downloading or using Show Up, you agree to these terms. If you do not agree, please do not use the app.</p>
+
+        <h3>What Show Up Is</h3>
+        <p>Show Up is a personal development tool designed to help you build daily consistency through self-made promises. It is not a substitute for professional mental health care, therapy, crisis intervention, or medical treatment of any kind.</p>
+
+        <h3>What Show Up Is Not</h3>
+        <p>Show Up is not a mental health app, a therapy tool, a crisis service, or a clinical self-monitoring device. If you are experiencing a mental health crisis, please contact a licensed professional or call or text 988 (Suicide and Crisis Lifeline) at any time.</p>
+
+        <h3>Your Content</h3>
+        <p>The promises and entries you write in Show Up belong to you. We do not access, read, or share your content. You are responsible for the content you enter into the app.</p>
+
+        <h3>Subscriptions</h3>
+        <p>Show Up offers optional premium subscriptions processed through Apple's App Store and managed by RevenueCat. Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period. You can manage and cancel subscriptions in your Apple ID account settings.</p>
+
+        <h3>Disclaimer of Warranties</h3>
+        <p>Show Up is provided "as is" without warranties of any kind. Giraffe Cave LLC does not warrant that the app will be uninterrupted, error-free, or free of harmful components.</p>
+
+        <h3>Limitation of Liability</h3>
+        <p>To the maximum extent permitted by law, Giraffe Cave LLC shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of Show Up.</p>
+
+        <h3>Changes</h3>
+        <p>We may update these terms from time to time. Continued use of the app after changes constitutes acceptance of the updated terms.</p>
+
+        <h3>Contact</h3>
+        <p>Questions about these terms? Contact us at <a href="/cdn-cgi/l/email-protection#05626c776463636066647360456268646c692b666a68"><span class="__cf_email__" data-cfemail="a5c2ccd7c4c3c3c0c6c4d3c0e5c2c8c4ccc98bc6cac8">[email&#160;protected]</span></a></p>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Contact -->
+    <section id="contact">
+      <p class="section-label">Get in touch</p>
+      <h2 class="section-title">Contact</h2>
+      <p class="section-body" style="margin-bottom: 32px;">Questions, feedback, or support requests — we read everything.</p>
+
+      <div class="contact-row">
+        <span class="contact-icon">✉️</span>
+        <div>
+          <p class="contact-label">Email</p>
+          <p class="contact-value"><a href="/cdn-cgi/l/email-protection#187f716a797e7e7d7b796e7d587f75797174367b7775"><span class="__cf_email__" data-cfemail="5a3d33283b3c3c3f393b2c3f1a3d373b333674393537">[email&#160;protected]</span></a></p>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <span class="contact-icon">🏢</span>
+        <div>
+          <p class="contact-label">Mailing Address</p>
+          <p class="contact-value">Giraffe Cave LLC · P.O. Box 145 · Glendale, KY 42740</p>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <span class="contact-icon">📱</span>
+        <div>
+          <p class="contact-label">App Support</p>
+          <p class="contact-value"><a href="/cdn-cgi/l/email-protection#c4a3adb6a5a2a2a1a7a5b2a184a3a9a5ada8eaa7aba9"><span class="__cf_email__" data-cfemail="3f58564d5e59595a5c5e495a7f58525e5653115c5052">[email&#160;pr
