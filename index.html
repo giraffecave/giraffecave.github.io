@@ -110,6 +110,7 @@
     .legal-card .legal-date { font-size: 12px; color: var(--subtle); letter-spacing: 0.5px; margin-bottom: 24px; }
     .legal-card h3 { font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-top: 28px; margin-bottom: 10px; font-weight: 500; }
     .legal-card p { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 12px; }
+    .legal-card .legal-emphasis { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.7; margin-bottom: 12px; padding: 14px 18px; background: rgba(200,147,74,0.08); border-left: 3px solid var(--gold); border-radius: 4px; }
     .legal-card a { color: var(--gold); text-decoration: none; }
     .legal-card a:hover { text-decoration: underline; }
     .contact-row { display: flex; align-items: center; gap: 16px; padding: 20px 24px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; margin-bottom: 12px; backdrop-filter: blur(8px); }
@@ -180,10 +181,11 @@
     <section id="privacy">
       <div class="legal-card">
         <h2>Privacy Policy</h2>
-        <p class="legal-date">Effective Date: May 2026</p>
+        <p class="legal-date">Last Updated: May 14, 2026</p>
 
         <h3>Overview</h3>
         <p>Giraffe Cave LLC ("we," "us," or "our") built the Show Up app as a personal development tool. This policy explains how we handle your information when you use our app.</p>
+        <p class="legal-emphasis">We do not collect personal information. We cannot read your promise entries. Your data is encrypted on your device before being anonymously backed up to our cloud service so you can restore your progress on a new device. The encryption key never leaves your device — even we cannot decrypt your entries.</p>
 
         <h3>Information We Collect</h3>
         <p>Show Up stores your daily promises and check-in results locally on your device. Your progress is also automatically and anonymously backed up to our secure cloud servers to protect your data and allow you to restore it on a new device.</p>
@@ -194,19 +196,27 @@
         <p>We do not collect your name, email address, location, or any personally identifiable information unless you contact us directly for support. We do not use advertising networks or sell data to third parties. We do not track your behavior across other apps or websites.</p>
 
         <h3>Data Deletion</h3>
-        <p>Your data on your device is deleted when you uninstall the app or use the "Start Fresh" feature in Settings. To request deletion of your cloud backup data, email us at <a href="mailto:showup@giraffecave.com">showup@giraffecave.com</a> with your Backup ID (found in Settings → Cloud Backup). We will delete your data within 30 days.</p>
+        <p>Your data on your device is deleted when you uninstall the app or use the "Start Fresh" feature in Settings. To request deletion of your cloud backup data, email us at <a href="mailto:showup@giraffecave.com">showup@giraffecave.com</a> with your Backup ID (found in Settings → Cloud Backup). We will delete your corresponding records within 30 days of receiving your request.</p>
 
-        <h3>Third-Party Services</h3>
-        <p>Show Up uses RevenueCat to process in-app purchases and Supabase for secure encrypted cloud backup storage. We do not share your promise content with any third party. <a href="https://www.revenuecat.com/privacy" target="_blank">RevenueCat Privacy Policy</a> · <a href="https://supabase.com/privacy" target="_blank">Supabase Privacy Policy</a></p>
+        <h3>Third-Party Service Providers</h3>
+        <p>We use the following service providers to operate Show Up. Each receives only the minimum data necessary, and none receive personally identifiable information about you:</p>
+        <p><strong style="color: var(--text);">Apple Inc.</strong> — App Store distribution and payment processing.<br>
+        <strong style="color: var(--text);">Supabase</strong> — Encrypted backup storage (encrypted entries only, tied to anonymous UUID). <a href="https://supabase.com/privacy" target="_blank">Privacy Policy</a><br>
+        <strong style="color: var(--text);">RevenueCat</strong> — Subscription management (anonymous subscription status only). <a href="https://www.revenuecat.com/privacy" target="_blank">Privacy Policy</a><br>
+        <strong style="color: var(--text);">Expo</strong> — App build and notification infrastructure.</p>
+        <p>We do not share your promise content with any third party.</p>
 
-        <h3>Crisis Safety</h3>
-        <p>Show Up is a self-reflection tool, not a mental health treatment or crisis intervention service. If certain keywords suggesting distress are detected in the promise input field, the app surfaces crisis support resources including the 988 Suicide and Crisis Lifeline. This detection occurs entirely on your device and no content is transmitted to us.</p>
+        <h3>Crisis Safety Feature</h3>
+        <p>Show Up is a self-reflection tool, not a mental health treatment or crisis intervention service. If certain keywords suggesting distress are detected in the promise input field, the app surfaces crisis support resources including the 988 Suicide and Crisis Lifeline. This detection occurs entirely on your device. No content related to this detection is transmitted to us or stored on our servers.</p>
 
         <h3>Children's Privacy</h3>
-        <p>Show Up is not directed at children under 13. We do not knowingly collect information from children under 13.</p>
+        <p>Show Up is not directed at children under 13. We do not knowingly collect information from children under 13. If you believe a child has provided us with information, please contact us so we may delete it.</p>
+
+        <h3>Your Rights</h3>
+        <p>Because we do not collect personally identifiable information, traditional privacy rights (access, correction, portability) generally do not apply in the typical sense. However, you may at any time: (1) request deletion of your encrypted entries using your Backup ID; (2) delete the app from your device to stop all data generation; (3) disable iCloud or device backup to prevent local data retention.</p>
 
         <h3>Changes to This Policy</h3>
-        <p>We may update this policy from time to time. Changes will be posted on this page with an updated effective date.</p>
+        <p>We may update this policy from time to time. The "Last Updated" date at the top reflects the most recent change. Continued use of Show Up after any update constitutes your acceptance of the revised Policy.</p>
 
         <h3>Contact Us</h3>
         <p>Questions about this privacy policy? Contact us at <a href="mailto:showup@giraffecave.com">showup@giraffecave.com</a></p>
@@ -218,16 +228,20 @@
     <section id="terms">
       <div class="legal-card">
         <h2>Terms of Service</h2>
-        <p class="legal-date">Effective Date: May 2026</p>
+        <p class="legal-date">Last Updated: May 14, 2026</p>
 
         <h3>Acceptance</h3>
-        <p>By downloading or using Show Up, you agree to these terms. If you do not agree, please do not use the app.</p>
+        <p>These Terms of Service ("Terms") govern your use of Show Up: Daily Promise ("Show Up"), operated by Giraffe Cave LLC, organized under the laws of the Commonwealth of Kentucky ("we", "us", "our"). By downloading, installing, or using Show Up, you agree to these Terms. If you do not agree, please do not use the app.</p>
 
         <h3>What Show Up Is</h3>
-        <p>Show Up is a personal development tool designed to help you build daily consistency through self-made promises. It is not a substitute for professional mental health care, therapy, crisis intervention, or medical treatment of any kind.</p>
+        <p class="legal-emphasis">Show Up is a self-reflection tool. It is not a medical device, mental health treatment, therapy, crisis support service, or substitute for professional care. Do not use Show Up in place of seeking qualified medical, psychological, or emergency support.</p>
+        <p>If you are experiencing a mental health crisis or having thoughts of self-harm, please contact the 988 Suicide and Crisis Lifeline, your local emergency services, or a qualified mental health professional immediately.</p>
 
         <h3>What Show Up Is Not</h3>
-        <p>Show Up is not a mental health app, a therapy tool, a crisis service, or a clinical self-monitoring device. If you are experiencing a mental health crisis, please contact a licensed professional or call or text 988 (Suicide and Crisis Lifeline) at any time.</p>
+        <p>Show Up is not a mental health app, a therapy tool, a crisis service, or a clinical self-monitoring device.</p>
+
+        <h3>License to Use</h3>
+        <p>Subject to these Terms, we grant you a limited, non-exclusive, non-transferable, revocable license to use Show Up for your personal, non-commercial use.</p>
 
         <h3>Your Content</h3>
         <p>The promises and entries you write in Show Up belong to you. Your content is encrypted before being stored in the cloud. We cannot read, sell, or share your content. You are responsible for the content you enter into the app.</p>
@@ -235,17 +249,46 @@
         <h3>Cloud Backup</h3>
         <p>Show Up automatically backs up your encrypted promise history to secure cloud servers. This backup is anonymous and linked only to a randomly generated ID on your device. You can view your Backup ID, manually back up, restore from backup, or request data deletion at any time in Settings → Cloud Backup.</p>
 
-        <h3>Subscriptions</h3>
-        <p>Show Up offers optional premium subscriptions processed through Apple's App Store and managed by RevenueCat. Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period. You can manage and cancel subscriptions in your Apple ID account settings.</p>
+        <h3>Subscriptions and Payments</h3>
+        <p>Show Up offers optional premium subscriptions through Apple's App Store. Subscription tiers include Show Up Premium Weekly ($1.99/week), Show Up Premium Monthly ($4.99/month), and Show Up Premium Annual ($29.99/year). A 7-day free trial is offered to eligible new subscribers. If you do not cancel before the trial ends, the subscription will auto-renew at the standard rate. Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period. You can manage and cancel subscriptions through your Apple ID account settings. Refunds are handled by Apple in accordance with Apple's refund policies.</p>
+
+        <h3>Your Conduct</h3>
+        <p>You agree not to use Show Up for any unlawful purpose, to reverse engineer or attempt to extract source code from the app, to use the app to harass or harm yourself or others, or to circumvent any feature designed to limit use or access.</p>
+
+        <h3>Intellectual Property</h3>
+        <p>All rights, title, and interest in Show Up — including the app's design, branding, copy, code, and the bee metaphor and "honeycomb" visual identity — are owned by Giraffe Cave LLC. These Terms do not grant you ownership of any intellectual property.</p>
 
         <h3>Disclaimer of Warranties</h3>
-        <p>Show Up is provided "as is" without warranties of any kind. Giraffe Cave LLC does not warrant that the app will be uninterrupted, error-free, or free of harmful components.</p>
+        <p>Show Up is provided "as is" and "as available" without warranties of any kind, either express or implied. Giraffe Cave LLC does not warrant that the app will be uninterrupted, error-free, or free of harmful components. You use Show Up at your own risk.</p>
 
         <h3>Limitation of Liability</h3>
-        <p>To the maximum extent permitted by law, Giraffe Cave LLC shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of Show Up.</p>
+        <p>To the maximum extent permitted by applicable law, in no event shall Giraffe Cave LLC, its officers, members, employees, or affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, use, or goodwill, arising out of or in connection with your use of Show Up.</p>
+        <p>Our total cumulative liability to you for any claim arising out of or relating to these Terms or Show Up shall not exceed the greater of one hundred U.S. dollars ($100) or the amount you paid us in the twelve months preceding the claim.</p>
 
-        <h3>Changes</h3>
-        <p>We may update these terms from time to time. Continued use of the app after changes constitutes acceptance of the updated terms.</p>
+        <h3>Governing Law</h3>
+        <p>These Terms are governed by the laws of the Commonwealth of Kentucky, without regard to its conflict of laws principles. Giraffe Cave LLC is organized under the laws of Kentucky.</p>
+
+        <h3>Arbitration Agreement</h3>
+        <p>You and Giraffe Cave LLC agree that any dispute, claim, or controversy arising out of or relating to these Terms or your use of Show Up shall be resolved through binding individual arbitration. The arbitration shall be administered by the American Arbitration Association ("AAA") under its Consumer Arbitration Rules then in effect. The arbitration may be conducted in Kentucky or via remote means at the arbitrator's discretion.</p>
+
+        <h3>Class Action Waiver and Jury Trial Waiver</h3>
+        <p class="legal-emphasis">YOU AND GIRAFFE CAVE LLC AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN AN INDIVIDUAL CAPACITY, AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS, CONSOLIDATED, OR REPRESENTATIVE PROCEEDING. YOU WAIVE ANY RIGHT TO A TRIAL BY JURY.</p>
+        <p>If a court of competent jurisdiction determines that any portion of this Arbitration Agreement or Class Action Waiver is unenforceable, the remainder of these provisions shall continue in full force and effect.</p>
+
+        <h3>Exceptions to Arbitration</h3>
+        <p>Notwithstanding the above, either party may bring an individual action in small claims court. This Arbitration Agreement does not preclude either party from seeking injunctive or equitable relief in court for intellectual property matters.</p>
+
+        <h3>Termination</h3>
+        <p>We may suspend or terminate your access to Show Up at our discretion, with or without notice, including for any violation of these Terms. You may stop using the app at any time by deleting it from your device.</p>
+
+        <h3>Severability</h3>
+        <p>If any provision of these Terms is held invalid or unenforceable, the remaining provisions shall continue in full force and effect.</p>
+
+        <h3>Changes to These Terms</h3>
+        <p>We may update these Terms from time to time. Continued use of Show Up after any update constitutes your acceptance of the revised Terms. Material changes will be reflected by an updated "Last Updated" date at the top of this document.</p>
+
+        <h3>Entire Agreement</h3>
+        <p>These Terms, together with the Privacy Policy, constitute the entire agreement between you and Giraffe Cave LLC regarding Show Up and supersede any prior agreements.</p>
 
         <h3>Contact</h3>
         <p>Questions about these terms? Contact us at <a href="mailto:showup@giraffecave.com">showup@giraffecave.com</a></p>
